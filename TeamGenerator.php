@@ -8,12 +8,33 @@ abstract class RLGameType {
 
 class TeamGenerator {
 
+	/**
+	 * The call back for generating player score.
+	 *
+	 * @var Closure $getScoreCallBack
+	 */
 	private $getScoreCallBack;
 
-	public function __construct($getScoreForPlayerCallback) {
+	/**
+	 * Create the TeamGenerator with a custom defined Closure
+	 * for obtaining a users skill level.
+	 *
+	 * @param Closure $getScoreForPlayerCallback
+	 */
+	public function __construct($getScoreForPlayerCallback) 
+	{
 		$this->getScoreCallBack = $getScoreForPlayerCallback;
 	}
 
+	/**
+	 * Generate the teams based on the players passed
+	 * and the number of players per team.
+	 * 
+	 * @param  array   $players
+	 * @param  int     $gameType
+	 * @param  int     $verb
+	 * @return array
+	 */
 	public function generateTeams($players, $gameType, $verb = 0)
 	{
 
