@@ -9,6 +9,9 @@ abstract class RLGameType {
 class TeamGenerator {
 	public function generateTeams($players, $gameType, $verb = 0)
 	{
+
+		// Remove duplicate player entries
+		$players = array_unique($players, SORT_REGULAR);
 		$size = $gameType;
 
 		if ($verb > 0) {
@@ -22,7 +25,7 @@ class TeamGenerator {
 
 		if (count($players) % $size !== 0) {
 			if ($verb > 0) echo "Error: Number of players must be divisible by 3 to generate Standard teams." . PHP_EOL;
-			return;
+			return null;
 		}
 
 		if ($verb > 0) {
@@ -74,7 +77,6 @@ class TeamGenerator {
 			$tiers[] = $this->shuffle_assoc(array_slice($scores, $offset, count($scores) / $size, true));
 			$offset += (count($scores) / $size);
 		}
-
 		
 		// Sort the players into teams with balance
 		// by taking one player from each skill tier.

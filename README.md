@@ -22,7 +22,7 @@ Processed: (1813.2) reecerl
 Processed: (16217.5) 76561198153554726
 Processed: (5032.8) 76561198156372996
 Processed: (18669.8) fiveftoffun
-Processed: (2224.6) 76561198011484192
+Processed: (7213.5) freddykgaming
 ------------------------------------
 
 Generated Teams
@@ -31,23 +31,30 @@ Array
 (
     [team1] => Array
         (
-            [kev1ne] => 79221.5
-            [DOGDWARF] => 7072.3
+            [fiveftoffun] => 18669.8
+            [76561198156372996] => 5032.8
             [VestolGaming] => 5011.4
         )
 
     [team2] => Array
         (
-            [Frutz] => 47896.2
-            [76561198153554726] => 16217.5
-            [thefiscster] => 2481.3
+            [kev1ne] => 79221.5
+            [ChewyTangy] => 5373.2
+            [76561198011484192] => 2224.6
         )
 
     [team3] => Array
         (
-            [fiveftoffun] => 18669.8
-            [ChewyTangy] => 5373.2
-            [76561198011484192] => 2224.6
+            [76561198153554726] => 16217.5
+            [freddykgaming] => 7213.5
+            [thefiscster] => 2481.3
+        )
+
+    [team4] => Array
+        (
+            [Frutz] => 47896.2
+            [DOGDWARF] => 7072.3
+            [reecerl] => 1813.2
         )
 
 )

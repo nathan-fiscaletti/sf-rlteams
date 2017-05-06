@@ -28,7 +28,7 @@ $testPlayers = [
 
 	'76561198156372996',
 	'fiveftoffun',
-	'76561198011484192'
+	'freddykgaming'
 ];
 
 // Create a new team generator.
