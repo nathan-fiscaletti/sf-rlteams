@@ -3,7 +3,7 @@ simple library for sorting rocket league teams for round robin tourny
 
 Example Output of 'Example.php'
 ```
-Generating Standard Teams
+Generating Rocket League Teams
 ------------------------------------
 Player Count: 12
 Team Size: 3
