@@ -30,17 +30,16 @@ class TeamGenerator {
 	 * Generate the teams based on the players passed
 	 * and the number of players per team.
 	 * 
-	 * @param  array   $players
-	 * @param  int     $gameType
-	 * @param  int     $verb
+	 * @param  array   $players The players to sort.
+	 * @param  int     $size    The size of a team.
+	 * @param  int     $verb    Set to 1 to show log messages.
 	 * @return array
 	 */
-	public function generateTeams($players, $gameType, $verb = 0)
+	public function generateTeams($players, $size, $verb = 0)
 	{
 
 		// Remove duplicate player entries
 		$players = array_unique($players, SORT_REGULAR);
-		$size = $gameType;
 
 		if ($verb > 0) {
 			echo 'Generating ' . $this->gameTypeToString($size) . ' Teams' . PHP_EOL;
