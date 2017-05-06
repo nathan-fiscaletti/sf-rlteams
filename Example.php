@@ -45,6 +45,10 @@ $teamGenerator = new TeamGenerator();
 //     the team size.
 //     
 
+
+// Get an initial time for benchmarking.
+$started = time();
+
 // The extra '1' at the end of the call
 // tells the system that we want to print
 // to cli while it works. 
@@ -68,3 +72,6 @@ echo '------------------------------------' . PHP_EOL;
 print_r($teams);
 
 echo '------------------------------------' . PHP_EOL;
+
+echo PHP_EOL;
+echo 'Completed in (' . (time() - $started) . 's) !'.PHP_EOL;
