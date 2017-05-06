@@ -31,35 +31,35 @@ Array
 (
     [team1] => Array
         (
-            [fiveftoffun] => 18669.8
-            [76561198156372996] => 5032.8
-            [VestolGaming] => 5011.4
+            [76561198153554726] => 16217.5
+            [DOGDWARF] => 7072.3
+            [thefiscster] => 2481.3
         )
 
     [team2] => Array
         (
-            [kev1ne] => 79221.5
+            [fiveftoffun] => 18669.8
             [ChewyTangy] => 5373.2
-            [76561198011484192] => 2224.6
+            [VestolGaming] => 5011.4
         )
 
     [team3] => Array
         (
-            [76561198153554726] => 16217.5
-            [freddykgaming] => 7213.5
-            [thefiscster] => 2481.3
+            [kev1ne] => 79221.5
+            [76561198156372996] => 5032.8
+            [76561198011484192] => 2224.6
         )
 
     [team4] => Array
         (
             [Frutz] => 47896.2
-            [DOGDWARF] => 7072.3
+            [freddykgaming] => 7213.5
             [reecerl] => 1813.2
         )
 
 )
 ------------------------------------
 
-Completed in (8s) !
+Completed in (6s) !
 
 ```
