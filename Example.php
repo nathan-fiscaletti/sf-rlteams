@@ -62,8 +62,8 @@ $started = time();
 $teams = $teamGenerator->generateTeams($testPlayers, 3, 1); 
 
 // Other Examples.
-//$teams = $teamGenerator->generateTeams($testPlayers, RLGameType::Doubles);
-//$teams = $teamGenerator->generateTeams($testPlayers, RLGameType::Chaos);
+//$teams = $teamGenerator->generateTeams($testPlayers, 2);
+//$teams = $teamGenerator->generateTeams($testPlayers, 4);
 
 if ($teams == null) {
 	echo 'Your player count probably isn\'t divisible by your team size.'.PHP_EOL;

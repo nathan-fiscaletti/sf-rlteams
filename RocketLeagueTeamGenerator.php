@@ -22,7 +22,8 @@ class RocketLeagueTeamGenerator extends TeamGenerator {
 	 * @param  strsing $player
 	 * @return float
 	 */
-	public function getSkillRankForPlayer($player) {
+	public function getSkillRankForPlayer($player) 
+	{
 		// Retrieve content from web site hosting score data.
 		$content = file_get_contents(
 			'https://rocketleague.tracker.network/profile/steam/'.$player
