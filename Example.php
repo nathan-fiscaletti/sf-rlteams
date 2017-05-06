@@ -1,6 +1,6 @@
 <?php
 
-include_once 'TeamGenerator.php';
+include_once 'RocketLeagueTeamGenerator.php';
 
 // Clear the console, since we're running
 // this example via CLI.
@@ -36,17 +36,7 @@ $testPlayers = [
 // how the team generator will generate
 // a score for each player. You can customize
 // this as you like.
-$teamGenerator = new TeamGenerator(function ($player) {
-	// Retrieve content from web site hosting score data.
-	$content = file_get_contents(
-		'https://rocketleague.tracker.network/profile/steam/'.$player
-	);
-
-	// Filter out score data from content
-	// annd cast it to a float value
-	// before returning it.
-	return floatval(str_replace(',', '', trim(explode('</', explode('"Score">', $content)[1])[0])));
-});
+$teamGenerator = new RocketLeagueTeamGenerator();
 
 // Since we have a list of 12 players, we can generate teams
 // of any number that 12 is divisible by. So we can generate
@@ -69,7 +59,7 @@ $started = time();
 // 
 // You can ommit this parameter all together and 
 // it will siply not print to console.
-$teams = $teamGenerator->generateTeams($testPlayers, RLGameType::Standard, 1); 
+$teams = $teamGenerator->generateTeams($testPlayers, 3, 1); 
 
 // Other Examples.
 //$teams = $teamGenerator->generateTeams($testPlayers, RLGameType::Doubles);

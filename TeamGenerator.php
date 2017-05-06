@@ -1,30 +1,14 @@
 <?php
 
-abstract class RLGameType {
-	const Chaos    = 4;
-	const Standard = 3;
-	const Doubles  = 2;
-}
-
-class TeamGenerator {
+abstract class TeamGenerator {
 
 	/**
-	 * The call back for generating player score.
-	 *
-	 * @var Closure $getScoreCallBack
+	 * The name of the game we're generating 
+	 * teams for.
+	 * 
+	 * @var string
 	 */
-	private $getScoreCallBack;
-
-	/**
-	 * Create the TeamGenerator with a custom defined Closure
-	 * for obtaining a users skill level.
-	 *
-	 * @param Closure $getScoreForPlayerCallback
-	 */
-	public function __construct($getScoreForPlayerCallback) 
-	{
-		$this->getScoreCallBack = $getScoreForPlayerCallback;
-	}
+	public $gameName = "";
 
 	/**
 	 * Generate the teams based on the players passed
@@ -35,14 +19,14 @@ class TeamGenerator {
 	 * @param  int     $verb    Set to 1 to show log messages.
 	 * @return array
 	 */
-	public function generateTeams($players, $size, $verb = 0)
+	public final function generateTeams($players, $size, $verb = 0)
 	{
 
 		// Remove duplicate player entries
 		$players = array_unique($players, SORT_REGULAR);
 
 		if ($verb > 0) {
-			echo 'Generating ' . $this->gameTypeToString($size) . ' Teams' . PHP_EOL;
+			echo 'Generating '.(($this->gameName == '')?'Balanced':$this->gameName).' Teams' . PHP_EOL;
 			echo '------------------------------------' . PHP_EOL;
 			echo 'Player Count: ' . count($players) . PHP_EOL;
 			echo 'Team Size: ' . $size . PHP_EOL;
@@ -50,6 +34,7 @@ class TeamGenerator {
 			echo PHP_EOL;
 		}
 
+		// Check for invalid player number / team size.
 		if (count($players) % $size !== 0) {
 			if ($verb > 0) echo "Error: Number of players must be divisible by 3 to generate Standard teams." . PHP_EOL;
 			return null;
@@ -60,11 +45,11 @@ class TeamGenerator {
 			echo '------------------------------------' . PHP_EOL;
 		}
 
+		// Retrieve the scores for each player using
+		// the predefined closure to retrieve stats.
 		$scores = [];
-		
-		// Retrieve the scores for each player
 		foreach ($players as $player) {
-			$pScore = $this->getScoreCallBack->call($this, $player);
+			$pScore = $this->getSkillRankForPlayer($player);
 			if ($verb > 0) 
 				echo 'Processed: ' . $player . ' (' . $pScore . ') '. PHP_EOL;
 		    $scores[$player] = $pScore;
@@ -76,7 +61,8 @@ class TeamGenerator {
 		}
 
 		
-		// Sort the players by score
+		// Sort the players based on the results
+		// from the skill level retrieval closure.
 		uasort($scores, function ($player1, $player2) {
 			if ($player1 == $player2)
 				return 0;
@@ -127,16 +113,15 @@ class TeamGenerator {
 		return $teams;
 	}
 
-	private function gameTypeToString($gameType)
-	{
-		switch($gameType) {
-			case RLGameType::Chaos    : return 'Chaos';
-			case RLGameType::Standard : return 'Standard';
-			case RLGameType::Doubles  : return 'Doubles';
-
-			default : return "Unknown";
-		}
-	}
+	/**
+	 * Override this function in your implementation
+	 * of the class to get the skill ranking for a player.
+	 * 
+	 * @param  string $player The player
+	 * 
+	 * @return float
+	 */
+	public abstract function getSkillRankForPlayer($player);
 
 	private function shuffle_assoc($my_array)  
 	{  
