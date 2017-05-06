@@ -32,7 +32,21 @@ $testPlayers = [
 ];
 
 // Create a new team generator.
-$teamGenerator = new TeamGenerator();
+// The closure in the constructor is 
+// how the team generator will generate
+// a score for each player. You can customize
+// this as you like.
+$teamGenerator = new TeamGenerator(function ($player) {
+	// Retrieve content from web site hosting score data.
+	$content = file_get_contents(
+		'https://rocketleague.tracker.network/profile/steam/'.$player
+	);
+
+	// Filter out score data from content
+	// annd cast it to a float value
+	// before returning it.
+	return floatval(str_replace(',', '', trim(explode('</', explode('"Score">', $content)[1])[0])));
+});
 
 // Since we have a list of 12 players, we can generate teams
 // of any number that 12 is divisible by. So we can generate

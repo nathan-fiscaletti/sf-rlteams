@@ -7,6 +7,13 @@ abstract class RLGameType {
 }
 
 class TeamGenerator {
+
+	private $getScoreCallBack;
+
+	public function __construct($getScoreForPlayerCallback) {
+		$this->getScoreCallBack = $getScoreForPlayerCallback;
+	}
+
 	public function generateTeams($players, $gameType, $verb = 0)
 	{
 
@@ -37,7 +44,7 @@ class TeamGenerator {
 		
 		// Retrieve the scores for each player
 		foreach ($players as $player) {
-			$pScore = $this->getScoreForPlayer($player);
+			$pScore = $this->getScoreCallBack->call($this, $player);
 			if ($verb > 0) 
 				echo 'Processed: ' . $player . ' (' . $pScore . ') '. PHP_EOL;
 		    $scores[$player] = $pScore;
@@ -98,34 +105,6 @@ class TeamGenerator {
 		
 
 		return $teams;
-	}
-
-	private function getScoreForPlayer($player) {
-
-		// Retrieve content from web site hosting score data.
-		$content = file_get_contents(
-			'https://rocketleague.tracker.network/profile/steam/'.$player
-		);
-
-		// Filter out score data from content
-		// annd cast it to a float value
-		// before returning it.
-		return floatval(
-			str_replace(
-				',', 
-				'', 
-				trim(
-					explode(
-						'</', 
-						explode(
-							'"Score">', 
-							$content
-						)[1]
-					)[0]
-				)
-			)
-		);
-
 	}
 
 	private function gameTypeToString($gameType)
