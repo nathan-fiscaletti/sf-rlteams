@@ -39,7 +39,7 @@ class TeamGenerator {
 		foreach ($players as $player) {
 			$pScore = $this->getScoreForPlayer($player);
 			if ($verb > 0) 
-				echo 'Processed: (' . $pScore . ') ' . $player . PHP_EOL;
+				echo 'Processed: ' . $player . ' (' . $pScore . ') '. PHP_EOL;
 		    $scores[$player] = $pScore;
 		}
 
