@@ -4,11 +4,24 @@ abstract class TeamGenerator {
 
 	/**
 	 * The name of the game we're generating 
-	 * teams for.
+	 * teams for. You can set this in your
+	 * implementations constructor.
 	 * 
 	 * @var string
 	 */
 	public $gameName = "";
+
+	/**
+	 * Override the getSkilRankPlayer in your custom
+	 * implementation of TeamGenerator to customize
+	 * how the TeamGenerator obtains a players
+	 * personal skill ranking.
+	 * 
+	 * @param  string $player The player
+	 * 
+	 * @return float
+	 */
+	public abstract function getSkillRankForPlayer($player);	
 
 	/**
 	 * Generate the teams based on the players passed
@@ -114,23 +127,19 @@ abstract class TeamGenerator {
 	}
 
 	/**
-	 * Override this function in your implementation
-	 * of the class to get the skill ranking for a player.
+	 * Function used for shuffling an associative array.
 	 * 
-	 * @param  string $player The player
-	 * 
-	 * @return float
+	 * @param  array $arr
+	 * @return array
 	 */
-	public abstract function getSkillRankForPlayer($player);
-
-	private function shuffle_assoc($my_array)  
+	private function shuffle_assoc($arr)  
 	{  
-	    $keys = array_keys($my_array);  
+	    $keys = array_keys($arr);  
 	    shuffle($keys);  
 	    foreach($keys as $key) 
-	        $new[$key] = $my_array[$key];  
-  		$my_array = $new;  
+	        $new[$key] = $arr[$key];  
+  		$arr = $new;  
 
-	    return $my_array;  
+	    return $arr;  
 	} 
 }

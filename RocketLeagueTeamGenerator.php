@@ -4,13 +4,17 @@ include_once 'TeamGenerator.php';
 
 class RocketLeagueTeamGenerator extends TeamGenerator {
 
+	/**
+	 * Construct the TeamGenerator with
+	 * the gameName "Rocket League".
+	 */
 	function __construct()
 	{
 		$this->gameName = "Rocket League";
 	}
 
 	/**
-	 * Override the getSkilRankPlayer in your custom
+	 * Override the getSkillRankPlayer in your custom
 	 * implementation of TeamGenerator to customize
 	 * how the TeamGenerator obtains a players
 	 * personal skill ranking.
@@ -25,7 +29,7 @@ class RocketLeagueTeamGenerator extends TeamGenerator {
 		);
 
 		// Filter out score data from content
-		// annd cast it to a float value
+		// and cast it to a float value
 		// before returning it.
 		return floatval(str_replace(',', '', trim(explode('</', explode('"Score">', $content)[1])[0])));
 	}
