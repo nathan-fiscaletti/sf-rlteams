@@ -5,7 +5,7 @@ include_once 'RocketLeagueTeamGenerator.php';
 // Clear the console, since we're running
 // this example via CLI.
 $clearHeight = 50;
-for ($clearHeight--) echo PHP_EOL;
+while ($clearHeight--) echo PHP_EOL;
 
 // Array of 12 valid rocket league players
 // (
