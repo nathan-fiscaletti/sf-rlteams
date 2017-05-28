@@ -1,5 +1,7 @@
 <?php
 
+namespace TeamGenerator;
+
 abstract class TeamGenerator {
 
 	/**

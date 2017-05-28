@@ -1,6 +1,8 @@
 <?php
 
-include_once 'RocketLeagueTeamGenerator.php';
+include_once './vendor/autoload.php';
+
+use TeamGenerator\Generators\RocketLeagueTeamGenerator;
 
 // Clear the console, since we're running
 // this example via CLI.

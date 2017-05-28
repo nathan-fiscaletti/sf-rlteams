@@ -1,0 +1,18 @@
+{
+    "name": "nathanf/sf-rlteams",
+    "description": "A team generating library",
+    "type": "project",
+    "require": {},
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nathan Fiscaletti",
+            "email": "nathhan.fiscaletti@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "TeamGenerator\\": "src/TeamGenerator"
+        }
+    }
+}

@@ -1,6 +1,8 @@
 <?php
 
-include_once 'TeamGenerator.php';
+namespace TeamGenerator\Generators;
+
+use TeamGenerator\TeamGenerator;
 
 class RocketLeagueTeamGenerator extends TeamGenerator {
 
