@@ -56,6 +56,7 @@ final class RocketLeagueTeamGenerator extends TeamGenerator {
 			$ranks[] = (int)str_replace(',', '', $arr[count($arr) - 1]);
 		}
 
+		// Sort the ranks by MMR
 		usort($ranks, function ($rank1, $rank2) {
 			if ($rank1 == $rank2)
 				return 0;
@@ -63,10 +64,8 @@ final class RocketLeagueTeamGenerator extends TeamGenerator {
 			return ($rank1 > $rank2) ? -1 : 1;
 		});
 
+		// Return the average of the two best ranks for a player.
 		return (int)(($ranks[0] + $ranks[1]) / 2);
-		
-		// Return the average MMR for the player.
-		//return (int)(array_sum($average) / count($average));
 	}
 
 	/**
