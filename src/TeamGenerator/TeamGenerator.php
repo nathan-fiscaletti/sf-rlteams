@@ -23,7 +23,26 @@ abstract class TeamGenerator {
 	 * 
 	 * @return float
 	 */
-	public abstract function getSkillRankForPlayer($player);	
+	public abstract function getSkillRankForPlayer($player);
+
+	/**
+	 * Retrieve the Name for a player.
+	 * This can be useful for converting Steam IDs.
+	 *
+	 * This defaults to the key value in the $players array
+	 * passed to the generateTeams function.
+	 *
+	 * This is called AFTER getSkillRankForPlayer, so you should
+	 * request your players data from API in getSkillRankForPlayer
+	 * and cache it for use with this function later.
+	 *
+	 * @param  string $player The player.
+	 * @return string The player name.
+	 */
+	public function getNameFor($player)
+	{
+		return $player;
+	}
 
 	/**
 	 * Generate the teams based on the players passed
@@ -42,22 +61,22 @@ abstract class TeamGenerator {
 
 		if ($verb > 0) {
 			echo 'Generating '.(($this->gameName == '')?'Balanced':$this->gameName).' Teams' . PHP_EOL;
-			echo '------------------------------------' . PHP_EOL;
+			echo '---------------------------------------------------------' . PHP_EOL;
 			echo 'Player Count: ' . count($players) . PHP_EOL;
 			echo 'Team Size: ' . $size . PHP_EOL;
-			echo '------------------------------------' . PHP_EOL;
+			echo '---------------------------------------------------------' . PHP_EOL;
 			echo PHP_EOL;
 		}
 
 		// Check for invalid player number / team size.
 		if (count($players) % $size !== 0) {
-			if ($verb > 0) echo "Error: Number of players must be divisible by 3 to generate Standard teams." . PHP_EOL;
+			if ($verb > 0) echo "Error: Number of players must be divisible by team size." . PHP_EOL;
 			return null;
 		}
 
 		if ($verb > 0) {
 			echo 'Processing Players' . PHP_EOL;
-			echo '------------------------------------' . PHP_EOL;
+			echo '---------------------------------------------------------' . PHP_EOL;
 		}
 
 		// Retrieve the scores for each player using
@@ -65,13 +84,15 @@ abstract class TeamGenerator {
 		$scores = [];
 		foreach ($players as $player) {
 			$pScore = $this->getSkillRankForPlayer($player);
+			$pName = $this->getNameFor($player);
+			$pName = ($pName == null) ? $player : $pName;
+			$scores[$pName] = $pScore;
 			if ($verb > 0) 
-				echo 'Processed: ' . $player . ' (' . $pScore . ') '. PHP_EOL;
-		    $scores[$player] = $pScore;
+				echo 'Processed: ' . $pName . ' (a.k.a ' . $player . ') [Player Rank: '. $pScore .'] '. PHP_EOL;
 		}
 
 		if ($verb > 0) {
-			echo '------------------------------------' . PHP_EOL;
+			echo '---------------------------------------------------------' . PHP_EOL;
 			echo PHP_EOL;
 		}
 
@@ -124,7 +145,6 @@ abstract class TeamGenerator {
 			}
 		}
 		
-
 		return $teams;
 	}
 
@@ -141,7 +161,6 @@ abstract class TeamGenerator {
 	    foreach($keys as $key) 
 	        $new[$key] = $arr[$key];  
   		$arr = $new;  
-
 	    return $arr;  
 	} 
 }

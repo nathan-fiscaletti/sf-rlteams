@@ -4,6 +4,8 @@ include_once './vendor/autoload.php';
 
 use TeamGenerator\Generators\RocketLeagueTeamGenerator;
 
+
+
 // Clear the console, since we're running
 // this example via CLI.
 $clearHeight = 50;
@@ -50,8 +52,7 @@ $teamGenerator = new RocketLeagueTeamGenerator();
 //     teams larger than 4. So long as
 //     the player count is divisible by
 //     the team size.
-//     
-
+$team_size = 3;
 
 // Get an initial time for benchmarking.
 $started = time();
@@ -62,11 +63,7 @@ $started = time();
 // 
 // You can ommit this parameter all together and 
 // it will siply not print to console.
-$teams = $teamGenerator->generateTeams($testPlayers, 3, 1); 
-
-// Other Examples.
-//$teams = $teamGenerator->generateTeams($testPlayers, 2);
-//$teams = $teamGenerator->generateTeams($testPlayers, 4);
+$teams = $teamGenerator->generateTeams($testPlayers, $team_size, 1); 
 
 if ($teams == null) {
 	echo 'Your player count probably isn\'t divisible by your team size.'.PHP_EOL;
@@ -74,11 +71,49 @@ if ($teams == null) {
 }
 
 echo 'Generated Teams' . PHP_EOL;
-echo '------------------------------------' . PHP_EOL;
+echo '---------------------------------------------------------' . PHP_EOL;
+echo PHP_EOL;
 
-print_r($teams);
-
-echo '------------------------------------' . PHP_EOL;
+displayTeams($teams);
 
 echo PHP_EOL;
 echo 'Completed in (' . (time() - $started) . 's) !'.PHP_EOL;
+
+
+
+
+// Utility functions
+
+/**
+ * Function for displayin the resulting teams.
+ *
+ * @param  array $teams
+ */
+function displayTeams($teams)
+{
+	foreach ($teams as $team_name => $team)
+	{
+		echo '| '.$team_name.PHP_EOL;
+		echo '---------------------------------------------------------'.PHP_EOL;
+		foreach ($team as $player_name => $player_rank) {
+			echo '| ' . $player_name . spaces(43 - (strlen($player_name))) . ' [Rank ' . ((strlen($player_rank) > 3) ? '' : ' ') . $player_rank . ']'.PHP_EOL;
+		}
+		echo '---------------------------------------------------------'.PHP_EOL;
+		echo PHP_EOL;
+	}
+}
+
+/**
+ * Generate $count spaces in a string.
+ *
+ * @param  int $count
+ * @return string
+ */
+function spaces($count)
+{
+	$ret = '';
+	while ($count--)
+		$ret .= ' ';
+
+	return $ret;
+}
