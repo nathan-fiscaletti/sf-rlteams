@@ -49,15 +49,24 @@ final class RocketLeagueTeamGenerator extends TeamGenerator {
 		];
 
 		// Collect the MMR for each playlist.
-		$average = [];
+		$ranks = [];
 		foreach ($ranks_to_average as $rank)
 		{
 			$arr = explode('>', explode('<div class="season-rank">', explode($rank, $this->content)[1])[0]);
-			$average[] = (int)str_replace(',', '', $arr[count($arr) - 1]);
+			$ranks[] = (int)str_replace(',', '', $arr[count($arr) - 1]);
 		}
+
+		usort($ranks, function ($rank1, $rank2) {
+			if ($rank1 == $rank2)
+				return 0;
+
+			return ($rank1 > $rank2) ? -1 : 1;
+		});
+
+		return (int)(($ranks[0] + $ranks[1]) / 2);
 		
 		// Return the average MMR for the player.
-		return (int)(array_sum($average) / count($average));
+		//return (int)(array_sum($average) / count($average));
 	}
 
 	/**
